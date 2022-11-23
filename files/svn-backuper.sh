@@ -5,7 +5,8 @@ fi
 # variables
 SVNDIR="/var/local/svn/"
 BACKUPDIR="/var/svn-backup"
-
+LASTBACKUP="/var/svn-backup/last_backup.txt"
+rm -f $LASTBACKUP
 find $SVNDIR* -maxdepth 0 -type d | while IFS= read -r DIR
 do
 	NAME=`expr match "$DIR" '.*\(/.*\)'`
@@ -16,9 +17,11 @@ do
     fi
     actual=$(svnlook youngest $DIR)
     if [ "$actual" != "$info" ] ; then
-	  echo "svnadmin dump $DIR > $BACKUPDIR$NAME.dump"
       svnadmin dump $DIR > $BACKUPDIR$NAME.dump
       echo $actual >$BACKUPDIR$NAME.info
+      chgrp users $BACKUPDIR$NAME.info
+      chgrp users $BACKUPDIR$NAME.dump
+      echo "$BACKUPDIR$NAME.dump">>$LASTBACKUP
+      echo "$BACKUPDIR$NAME.info">>$LASTBACKUP
     fi
-
 done

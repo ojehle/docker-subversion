@@ -3,6 +3,7 @@ if [ ! -d /var/svn-backup/ ]; then
   exit 0
 fi
 # variables
+GROUP=$(ls -l /var | grep svn-backup | awk '{ print $4}')
 SVNDIR="/var/local/svn/"
 BACKUPDIR="/var/svn-backup"
 LASTBACKUP="/var/svn-backup/last_backup.txt"
@@ -19,9 +20,10 @@ do
     if [ "$actual" != "$info" ] ; then
       svnadmin dump $DIR > $BACKUPDIR$NAME.dump
       echo $actual >$BACKUPDIR$NAME.info
-      chgrp users $BACKUPDIR$NAME.info
-      chgrp users $BACKUPDIR$NAME.dump
+      chgrp $GROUP  $BACKUPDIR$NAME.info
+      chgrp $GROUP  $BACKUPDIR$NAME.dump
       echo "$BACKUPDIR$NAME.dump">>$LASTBACKUP
       echo "$BACKUPDIR$NAME.info">>$LASTBACKUP
+      chgrp $GROUP $LASTBACKUP
     fi
 done

@@ -3,6 +3,8 @@ MAINTAINER MarvAmBass
 
 ENV LANG C.UTF-8
 
+COPY apt/sources.list /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y \
     subversion \
     cron \

@@ -68,3 +68,8 @@ Or if you're to lazy, just use this line for your file (for testing only!)
     -v $SVN_BACKUP:/var/svn-backup \
     -v $DAV_SVN_CONF/:/etc/apache2/dav_svn/ \
     --name subversion marvambass/subversion \
+
+## Build an push
+
+   docker build -t murks/docker-subversion:latest .
+   docker push murks/docker-subversion:latest

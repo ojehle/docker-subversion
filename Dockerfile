@@ -8,8 +8,7 @@ COPY apt/sources.list /etc/apt/sources.list
 RUN apt-get -y update && apt-get install -y \
     subversion \
     cron \
-    libapache2-mod-svn \
-    apache2
+    libapache2-mod-svn 
 
 RUN a2enmod dav_svn
 RUN a2enmod auth_digest

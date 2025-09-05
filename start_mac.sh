@@ -17,5 +17,5 @@ docker run \
 -v "$DAV_SVN_CONF":/etc/apache2/dav_svn/ \
 -p 9080:80 \
 -p 9443:443 \
---name svnserver murks/subversion \
+--name svnserver murks/docker-subversion \
 --restart unless-stopped

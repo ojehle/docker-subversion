@@ -1,4 +1,4 @@
-FROM murks/docker-apache2-ssl-secure
+FROM murks/docker-apache2-ssl-secure:trixie
 MAINTAINER MarvAmBass
 
 ENV LANG C.UTF-8
